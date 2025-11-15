@@ -1,0 +1,61 @@
+# Remediation script: enforce correct timezone, DST behavior, and time sync
+$log = "C:\Windows\Temp\FixDST_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
+Function Log { param($m) Add-Content -Path $log -Value ("[{0}] {1}" -f (Get-Date -Format o), $m) }
+
+try {
+    Log "Starting DST/time remediation."
+
+    # 1) Set timezone to UK (this handles DST transitions correctly)
+    $tz = "GMT Standard Time"
+    try {
+        Set-TimeZone -Id $tz -ErrorAction Stop
+        Log "Set-TimeZone -> $tz"
+    } catch {
+        Log "Failed to Set-TimeZone: $_"
+    }
+
+    # 2) Ensure Windows will auto-adjust for DST (registry)
+    $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    try {
+        # create if not exists
+        if (-not (Test-Path $regPath)) { New-Item -Path $regPath -Force | Out-Null }
+        # 0 = allow auto DST adjustments
+        Set-ItemProperty -Path $regPath -Name "DisableAutoDaylightTimeSet" -Value 0 -Type DWord -Force
+        Log "Registry DisableAutoDaylightTimeSet set to 0"
+    } catch {
+        Log "Failed to set registry value: $_"
+    }
+
+    # 3) Ensure Windows Time service is automatic and running
+    try {
+        Set-Service -Name W32Time -StartupType Automatic -ErrorAction Stop
+        Log "W32Time startup type set to Automatic"
+        Restart-Service -Name W32Time -Force -ErrorAction Stop
+        Log "W32Time service restarted"
+    } catch {
+        Log "Error setting/restarting W32Time: $_"
+    }
+
+    # 4) Force time resync
+    try {
+        w32tm /resync /force 2>&1 | ForEach-Object { Log $_ }
+        Log "w32tm resync attempted"
+    } catch {
+        Log "w32tm resync failed: $_"
+    }
+
+    # 5) Report current timezone and time
+    try {
+        $curTZ = Get-TimeZone
+        Log "Current TimeZone: $($curTZ.Id) - $($curTZ.DisplayName)"
+        Log "Local Time: $(Get-Date -Format o)"
+    } catch {
+        Log "Failed to get timezone/time: $_"
+    }
+
+    Log "DST/time remediation completed successfully."
+    exit 0
+} catch {
+    Log "Unhandled error: $_"
+    exit 1
+}
