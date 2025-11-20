@@ -1,0 +1,34 @@
+# Detection.ps1 - returns 0 if compliant, 1 if remediation needed
+$errors = @()
+
+try {
+    $tz = (Get-TimeZone).Id
+} catch {
+    $errors += "Unable to get timezone: $_"
+    $tz = $null
+}
+
+try {
+    $reg = Get-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation' -Name DisableAutoDaylightTimeSet -ErrorAction SilentlyContinue
+    $dstDisabled = $reg.DisableAutoDaylightTimeSet
+} catch {
+    $dstDisabled = $null
+}
+
+try {
+    $svc = (Get-Service -Name W32Time -ErrorAction SilentlyContinue)
+} catch {
+    $svc = $null
+}
+
+if ($tz -ne 'GMT Standard Time') { $errors += "Timezone is '$tz' (expected 'GMT Standard Time')." }
+if ($dstDisabled -ne 0) { $errors += "DisableAutoDaylightTimeSet = $dstDisabled (expected 0)." }
+if ($null -eq $svc -or $svc.Status -ne 'Running') { $errors += "W32Time service is not running." }
+
+if ($errors.Count -eq 0) {
+    Write-Output "Compliant"
+    exit 0
+} else {
+    Write-Output ("NonCompliant: " + ($errors -join '; '))
+    exit 1
+}
