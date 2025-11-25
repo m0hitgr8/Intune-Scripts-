@@ -1,0 +1,15 @@
+$serviceName = "WebClient"
+
+$svc = Get-Service -Name $serviceName -ErrorAction SilentlyContinue
+if (-not $svc) {
+    exit 1  # not compliant if service missing
+}
+
+$startMode = (Get-WmiObject -Class Win32_Service -Filter "Name='$serviceName'").StartMode
+$status    = $svc.Status
+
+if ($startMode -in 'Auto', 'Manual' -and $status -eq 'Running') {
+    exit 0   # compliant
+} else {
+    exit 1   # not compliant
+}
