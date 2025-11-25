@@ -1,0 +1,29 @@
+$ScriptName = "WIN-S-D-Serviceenable_WebClient"
+Start-Transcript -Path "$env:ProgramData\Microsoft\IntuneManagementExtension\Logs\$ScriptName.log" -Force
+
+# Define service name
+$ServiceName = "WebClient"
+
+# Check if the service exists before modifying it
+if (Get-Service -Name $ServiceName -ErrorAction SilentlyContinue) {
+    try {
+        # Set startup type to Automatic (change to 'Manual' if you prefer)
+        Set-Service -Name $ServiceName -StartupType Automatic -ErrorAction Stop
+        Write-Output "Successfully set $ServiceName to Automatic."
+
+        # Start service if not running
+        if ((Get-Service -Name $ServiceName).Status -ne 'Running') {
+            Start-Service -Name $ServiceName -ErrorAction Stop
+            Write-Output "Successfully started $ServiceName."
+        } else {
+            Write-Output "$ServiceName is already Running."
+        }
+
+    } catch {
+        Write-Error "Error while configuring $ServiceName : $_"
+    }
+} else {
+    Write-Warning "Service $ServiceName not found."
+}
+
+Stop-Transcript
