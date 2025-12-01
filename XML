@@ -1,0 +1,39 @@
+<AppLockerPolicy Version="1">
+  <RuleCollection Type="Exe" EnforcementMode="Enabled">
+
+    <!-- Allow Windows System files -->
+    <FilePathRule Id="{A1}" Name="Allow Windows" Action="Allow" UserOrGroupSid="S-1-1-0">
+      <Conditions>
+        <FilePathCondition Path="%WINDIR%\*" />
+      </Conditions>
+    </FilePathRule>
+
+    <!-- Allow Program Files -->
+    <FilePathRule Id="{A2}" Name="Allow Program Files" Action="Allow" UserOrGroupSid="S-1-1-0">
+      <Conditions>
+        <FilePathCondition Path="%PROGRAMFILES%\*" />
+        <FilePathCondition Path="%PROGRAMFILES(X86)%\*" />
+      </Conditions>
+    </FilePathRule>
+
+    <!-- Allow Microsoft signed apps -->
+    <PublisherRule Id="{A3}" Name="Allow Microsoft" Action="Allow" UserOrGroupSid="S-1-1-0">
+      <Conditions>
+        <PublisherCondition
+          PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US"
+          ProductName="*"
+          BinaryName="*" />
+      </Conditions>
+    </PublisherRule>
+
+    <!-- Block all EXE for Standard Users -->
+    <FilePathRule Id="{D1}" Name="Block EXE for Standard Users"
+      Action="Deny"
+      UserOrGroupSid="S-1-5-32-545"> <!-- BUILTIN\Users -->
+      <Conditions>
+        <FilePathCondition Path="*" />
+      </Conditions>
+    </FilePathRule>
+
+  </RuleCollection>
+</AppLockerPolicy>
