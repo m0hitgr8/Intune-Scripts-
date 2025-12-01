@@ -1,0 +1,64 @@
+<AppLockerPolicy Version="1">
+
+  <RuleCollection Type="Exe" EnforcementMode="Enabled">
+
+    <!-- Allow Windows Folder -->
+    <FilePathRule Id="{11111111-1111-1111-1111-111111111111}"
+                  Name="Allow Windows"
+                  Description=""
+                  UserOrGroupSid="S-1-1-0"
+                  Action="Allow">
+      <Conditions>
+        <FilePathCondition Path="%WINDIR%\*" />
+      </Conditions>
+    </FilePathRule>
+
+    <!-- Allow Program Files -->
+    <FilePathRule Id="{22222222-2222-2222-2222-222222222222}"
+                  Name="Allow ProgramFiles"
+                  Description=""
+                  UserOrGroupSid="S-1-1-0"
+                  Action="Allow">
+      <Conditions>
+        <FilePathCondition Path="%PROGRAMFILES%\*" />
+      </Conditions>
+    </FilePathRule>
+
+    <!-- Allow Program Files (x86) -->
+    <FilePathRule Id="{33333333-3333-3333-3333-333333333333}"
+                  Name="Allow ProgramFilesX86"
+                  Description=""
+                  UserOrGroupSid="S-1-1-0"
+                  Action="Allow">
+      <Conditions>
+        <FilePathCondition Path="%PROGRAMFILES(X86)%\*" />
+      </Conditions>
+    </FilePathRule>
+
+    <!-- Allow Microsoft Signed Apps -->
+    <PublisherRule Id="{44444444-4444-4444-4444-444444444444}"
+                   Name="Allow Microsoft"
+                   Description=""
+                   UserOrGroupSid="S-1-1-0"
+                   Action="Allow">
+      <Conditions>
+        <PublisherCondition PublisherName="O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US"
+                            ProductName="*"
+                            BinaryName="*" />
+      </Conditions>
+    </PublisherRule>
+
+    <!-- Deny ALL EXE for Standard Users -->
+    <FilePathRule Id="{55555555-5555-5555-5555-555555555555}"
+                  Name="Block EXE for standard users"
+                  Description=""
+                  UserOrGroupSid="S-1-5-32-545"
+                  Action="Deny">
+      <Conditions>
+        <FilePathCondition Path="*" />
+      </Conditions>
+    </FilePathRule>
+
+  </RuleCollection>
+
+</AppLockerPolicy>
