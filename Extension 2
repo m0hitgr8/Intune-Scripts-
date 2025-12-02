@@ -1,0 +1,5 @@
+$ExtID = "hlphpjodcfdbhfmbdjodbfnlolnmidfh"
+$Path = "C:\Program Files (x86)\Microsoft\Edge\Application\Extensions\$ExtID"
+
+if (Test-Path $Path) { exit 0 }
+exit 1
