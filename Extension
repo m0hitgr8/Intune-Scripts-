@@ -1,0 +1,21 @@
+$ExtID = "hlphpjodcfdbhfmbdjodbfnlolnmidfh"
+
+$Source = "$PSScriptRoot\$ExtID"
+$Dest   = "C:\Program Files (x86)\Microsoft\Edge\Application\Extensions\$ExtID"
+
+# Create destination
+New-Item -ItemType Directory -Force -Path $Dest | Out-Null
+
+# Copy extension
+Copy-Item -Path $Source\* -Destination $Dest -Recurse -Force
+
+# Apply Edge device policy to force local extension load
+$RegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist"
+New-Item -Path $RegPath -Force | Out-Null
+
+# Find next available registry slot
+$Existing = (Get-Item $RegPath).Property
+$Slot = ($Existing | Where-Object {$_ -match '^\d+$'}).Count + 1
+
+Set-ItemProperty -Path $RegPath -Name $Slot `
+  -Value "$ExtID;file:///$Dest"
