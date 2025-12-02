@@ -1,0 +1,2 @@
+Set-Location "C:\OfflineEdgeExtension"
+powershell -ExecutionPolicy Bypass -File .\Install-EdgeExtension.ps1
