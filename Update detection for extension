@@ -1,0 +1,19 @@
+$ExtID = "hlphpjodcfdbhfmbdjodbfnlolnmidfh"
+$FolderPath = "C:\Program Files (x86)\Microsoft\Edge\Application\Extensions\$ExtID"
+$RegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist"
+
+$folderExists = Test-Path $FolderPath
+$regExists = $false
+
+if (Test-Path $RegPath) {
+    $props = Get-ItemProperty -Path $RegPath
+    $matches = $props.PSObject.Properties |
+        Where-Object { $_.Name -match '^\d+$' -and $_.Value -like "$ExtID*" }
+    if ($matches) { $regExists = $true }
+}
+
+if ($folderExists -and $regExists) {
+    exit 0   # app is installed
+}
+
+exit 1       # app is NOT installed
