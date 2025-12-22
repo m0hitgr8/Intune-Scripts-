@@ -1,0 +1,10 @@
+Thank you for sharing your observations.
+
+We’ve reviewed the reported devices in detail and would like to clarify a few points from our analysis:
+	•	For a subset of devices, no primary user is assigned in Intune. As a result, user-targeted Intune policies and application deployments (including Tenable-related actions) would not apply to these endpoints. This has already been identified as a contributing factor.
+	•	For the remaining devices, the Tenable agent binaries and required files are present. On at least one EUC user device that was flagged as non-reporting, we manually validated the agent by running the nessuscli agent status command. The output confirmed that the agent is installed, running, and successfully connected to the Tenable cloud, which indicates that the service is active and capable of processing commands.
+	•	Additionally, these devices were not part of the non-compliant list shared last week, which suggests they were reporting correctly to Tenable at that time and the issue may be intermittent or reporting-related rather than a complete service failure.
+
+Based on this, re-triggering the installation/sync via Intune for the remaining devices is a safe action and should not fail universally due to a missing service. That said, for any devices where the Tenable service is genuinely not present or stopped, we agree that a reinstall or service remediation would be required, and we can handle those on a case-by-case basis once identified.
+
+Please let us know if you’d like us to proceed with additional validation (service state checks or targeted reinstalls) for the affected endpoints.
