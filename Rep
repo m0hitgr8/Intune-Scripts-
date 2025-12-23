@@ -1,0 +1,7 @@
+At the moment, this issue appears to be isolated to a single user and is not observed more broadly. As a precaution, I’ve already raised a packaging request for the updated driver so we can validate it in a controlled manner and keep it ready if required.
+
+That said, given the behaviour (keyboard and mouse not being detected consistently on boot), there is also a strong possibility that this could be hardware-related. It would be worth having the WPS team check the dock, cables, and port behaviour to rule out any physical or firmware-related issues.
+
+Once the driver package is ready, we can still test it on the affected device to conclusively verify whether it resolves the problem before considering any wider rollout.
+
+Please let me know if you’d like me to coordinate with WPS for the hardware checks.
