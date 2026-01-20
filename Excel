@@ -1,0 +1,12 @@
+=LET(
+    r,ROW(A1),
+    email,A1,
+    nextEmail,IFERROR(MATCH(TRUE,ISNUMBER(SEARCH("@",A2:A10000)),0)+r,""),
+    range,IF(nextEmail="",A2:A10000,INDEX(A:A,r+1):INDEX(A:A,nextEmail-1)),
+    cbg,COUNTIF(range,"CBG*"),
+    cpc,COUNTIF(range,"CPC*"),
+    IF(AND(cbg>=1,cpc>=1),
+        IF(AND(cbg=2,cpc=2),"SEGREGATE (2 CBG + 2 CPC)","KEEP"),
+        "EXCLUDE"
+    )
+)
