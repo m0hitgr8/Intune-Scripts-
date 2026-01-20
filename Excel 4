@@ -1,0 +1,8 @@
+=IF(
+  AND(
+    OR(LEFT(A3,3)="CBG",LEFT(A4,3)="CBG"),
+    OR(LEFT(A3,3)="CPC",LEFT(A4,3)="CPC")
+  ),
+  "KEEP",
+  "EXCLUDE"
+)
