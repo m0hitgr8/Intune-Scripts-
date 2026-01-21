@@ -1,8 +1,0 @@
-=IF(
-  AND(
-    COUNTIFS(A:A,"CBG*",ROW(A:A),ROW(A2)+{1,2})=1,
-    COUNTIFS(A:A,"CPC*",ROW(A:A),ROW(A2)+{1,2})=1
-  ),
-  "KEEP",
-  "EXCLUDE"
-)
