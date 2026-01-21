@@ -1,0 +1,11 @@
+Microsoft Edge automatically adjusts how much memory it uses based on what the user is doing. We are not setting a fixed memory limit for Edge. The reference to around 2 GB is only used as a practical benchmark to understand typical heavy usage when multiple business websites and applications are open at the same time. A lower value would not reflect real working conditions, while a much higher value would make it difficult to identify inefficient or unnecessary usage. The optimisation focuses on helping Edge release memory from tabs that are no longer being used, while still allowing it to use more memory when required. This approach follows Microsoft’s recommended behaviour and ensures performance improvements without restricting users or impacting their work.
+Your Data
+Microsoft Justification
+4–6 tabs = ~800 MB–1.2 GB
+Multi-process per-tab allocation
+8–10 tabs = ~1.5–2.5 GB
+Site isolation + extensions
+Heavy apps >2 GB
+Web apps + media processes
+2 GB inflection point
+Sleeping Tabs activation threshold
