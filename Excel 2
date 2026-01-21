@@ -1,8 +1,0 @@
-=LET(
-    startRow,ROW(A1),
-    nextEmailRow,IFERROR(MIN(FILTER(ROW(A:A),(ROW(A:A)>startRow)*ISNUMBER(SEARCH("@",A:A))))-1,ROWS(A:A)),
-    dataRange,INDEX(A:A,startRow+1):INDEX(A:A,nextEmailRow),
-    cbg,COUNTIF(dataRange,"CBG*"),
-    cpc,COUNTIF(dataRange,"CPC*"),
-    IF(AND(cbg=1,cpc=1),"KEEP","EXCLUDE")
-)
