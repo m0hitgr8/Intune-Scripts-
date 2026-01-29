@@ -1,0 +1,20 @@
+Thank you for highlighting this.
+
+To clarify, the additional investigation requested was completed and the outcome is reflected in the current recommendation. During the review, we specifically assessed the impact of the Microsoft Edge memory limiter in combination with the other performance controls already in place (Efficiency Mode, Sleeping Tabs, and tab lifecycle management).
+
+Based on Microsoft’s guidance and our internal testing, we identified that enforcing a hard memory cap can, in certain scenarios, cause active tabs to reload or become less responsive when users work with multiple high-memory web applications simultaneously. To avoid introducing any risk of perceived browser slowness or disruption to active user workflows, the explicit memory limiter setting was therefore removed, while retaining the remaining optimisation controls.
+
+It is important to note that Edge continues to manage memory dynamically through native features such as Sleeping Tabs and Efficiency Mode, which are designed by Microsoft to optimise performance without negatively impacting active usage. This aligns with Microsoft’s recommended approach for enterprise environments, where adaptive resource management is preferred over strict memory caps.
+
+For reference, Microsoft documentation on Edge performance and memory management can be found here:
+
+UV
+
+https://learn.microsoft.com/en-us/deployedge/microsoft-edge-efficiency-mode
+
+https://learn.microsoft.com/en-us/deployedge/microsoft-edge-sleeping-tabs
+
+If required, we can reintroduce a memory limit in a controlled pilot or apply it selectively to specific device profiles; however, at this stage, the current configuration provides the best balance between performance optimisation and user experience.
+
+Please let me know if you would like us to document this assessment explicitly in the Edge settings pack or review alternative thresholds.
+
