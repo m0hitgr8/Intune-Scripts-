@@ -1,0 +1,20 @@
+Efficiency Mode
+Reduces CPU usage and power consumption during browsing
+Slight reduction in background tab priority
+Enabled – Provides performance optimisation without impacting active tabs
+Sleeping Tabs
+Frees memory from inactive tabs after inactivity
+Inactive tabs may reload when revisited
+Enabled – Reload behaviour is expected and does not affect active usage
+Tab Lifecycle Management
+Prioritises resources for active tabs and applications
+Inactive tabs deprioritised
+Enabled – Improves responsiveness of foreground workloads
+Startup Boost
+Faster Edge launch time
+Consumes memory during system startup
+Disabled – Avoids unnecessary background resource usage at login
+Hard Memory Limit for Edge
+Prevents Edge from consuming excessive memory
+Can cause tab reloads or reduced responsiveness during high-memory, multi-tab workloads
+Not enforced – Risk to active user experience outweighs benefit at this stage
