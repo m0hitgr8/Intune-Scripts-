@@ -1,0 +1,23 @@
+Hi Team,
+
+We have reviewed the proposed approach to exclude users associated with Cloud PC (W365) from the Windows 10/11 Enterprise license assignment to avoid license shortfall.
+
+However, we would like to highlight an important scenario that needs to be addressed before finalising the scope.
+
+There is a subset of users who currently have both a Cloud PC and a physical (laptop) device assigned to them. If we exclude the group containing Cloud PC users entirely, these dual-device users will also be excluded from the Windows Enterprise license assignment, even though their physical devices still require the Windows 10/11 Enterprise license.
+
+This could result in:
+
+Physical devices falling out of licensing compliance
+
+Potential activation or feature downgrade on those devices
+
+Increased operational and audit risk
+
+To avoid this, we recommend:
+
+Ensuring users who have both Cloud PC and physical devices are explicitly included in the Windows 10/11 Enterprise license assignment scope, or
+
+Using a more granular targeting approach (for example, device-based or filtered groups) that assigns licenses only to physical Windows endpoints, while excluding Cloud PC–only users.
+
+Please let us know if you would like us to propose a revised group structure or filtering logic to support this requirement.
