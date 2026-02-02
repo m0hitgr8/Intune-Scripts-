@@ -1,9 +1,0 @@
-Hi All,
-
-As part of the corrective and preventive actions, we have created a detection and remediation script to address the DST time synchronization issue for affected users.
-
-Only one user reported the issue after the problem record was created, and the issue was successfully resolved following the deployment of the script. Since then, no additional reports have been received.
-
-Given the absence of further incidents, we propose proceeding with the closure of the problem record. Should the issue reoccur or be reported by other users in the future, the remediation script will be redeployed to resolve it promptly.
-
-Please let us know if there are any concerns.
