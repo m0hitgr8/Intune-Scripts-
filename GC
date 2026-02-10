@@ -1,0 +1,78 @@
+Google Chrome Assignment Process
+
+1. Purpose
+
+The purpose of this document is to define a controlled and standardised process for assigning Google Chrome to end-user devices. This ensures consistency, avoids policy conflicts, and simplifies troubleshooting and compliance management.
+
+⸻
+
+2. Scope
+
+This process applies to:
+	•	All Windows devices managed via Microsoft Intune
+	•	All user and device groups eligible for Google Chrome deployment
+	•	IT administrators responsible for application deployment and access management
+
+⸻
+
+3. Standard Assignment Model
+	•	Google Chrome must be assigned to only one dedicated Azure AD / Entra ID group.
+	•	This group will be the single source of assignment for Chrome deployment.
+	•	No additional user or device groups are permitted for Chrome assignment under any circumstances.
+
+⸻
+
+4. Assignment Rules
+	•	Chrome must not be assigned to:
+	•	Multiple user groups
+	•	Multiple device groups
+	•	Dynamic groups overlapping with the primary Chrome group
+	•	Mixing Required and Available assignments across different groups is strictly prohibited.
+	•	Any exception to this rule must go through formal approval and change management.
+
+⸻
+
+5. Rationale
+
+Following a single-group assignment approach:
+	•	Prevents deployment conflicts and unexpected install/uninstall behavior
+	•	Ensures predictable application delivery
+	•	Reduces troubleshooting complexity
+	•	Avoids inconsistent versioning and policy enforcement
+	•	Aligns with Intune best practices for application management
+
+⸻
+
+6. Monthly Review Process
+	•	The Chrome assignment group will be reviewed once every month.
+	•	The review will validate:
+	•	Group membership accuracy
+	•	Business justification for all assigned users/devices
+	•	Removal of inactive or no-longer-required accounts
+	•	Any discrepancies identified during the review will be corrected immediately.
+
+⸻
+
+7. Change Management
+	•	Any request to modify:
+	•	The Chrome assignment group
+	•	Assignment type (Required / Available)
+	•	Deployment scope
+must follow the approved Change Management Process.
+	•	Emergency changes must be documented and reviewed retrospectively.
+
+⸻
+
+8. Compliance
+	•	Non-compliance with this process may result in:
+	•	Application deployment failures
+	•	User impact
+	•	Audit findings
+	•	Repeated deviations will be escalated to the service owner.
+
+⸻
+
+9. Ownership
+	•	Application Owner: Endpoint Management Team
+	•	Review Frequency: Monthly
+	•	Document Review Cycle: Quarterly or as required
