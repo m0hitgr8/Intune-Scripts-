@@ -1,0 +1,21 @@
+This policy was created based on the requirement raised under work orders WO0000000138083 and WO0000000138421 for the group PERM-D-OpenText-SysTest-Commercial-xECM-ReadWrite-Only.
+
+The OpenText users required the Content Server Browser Web Extension.
+
+Initially, the extension was permitted under the standard Microsoft Edge policy, allowing manual installation from the Edge Add-ons store. However, since this is a Chrome-based extension, it was not getting installed successfully through the standard store flow. Users were experiencing delays as the extension was not being provisioned.
+
+To resolve this, we configured the extension using the Edge ADMX-backed policy by adding it to the ExtensionInstallForcelist along with the appropriate update URL (Chrome Web Store URL format). This ensures:
+	•	Silent installation in the background
+	•	No user interaction required
+	•	Controlled deployment of only the approved extension ID
+	•	No relaxation of existing CIS-aligned security controls
+
+For testing and controlled rollout, we created a separate policy (open-text-edgepolicy) and scoped it specifically to the OpenText user group. This was done to ensure that:
+	•	The extension installs only for the required users
+	•	Other standard users are not impacted
+	•	The broader Edge baseline remains unchanged
+	•	The implementation follows a least-privilege and scoped exception model
+
+The deployment was successful for the targeted group.
+
+Please let me know if you would like a walkthrough of the exact configuration or if we should review incorporating this into a broader standardized Edge policy framework.
