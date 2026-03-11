@@ -1,0 +1,9 @@
+Hi Barbara,
+
+We reviewed the request regarding the PeopleCert Exam Driver. These types of exam platforms typically require elevated permissions and system-level monitoring (such as screen capture, process monitoring, and security checks).
+
+Due to the security controls enforced on corporate devices (including endpoint protection and device compliance policies), running such software may conflict with our security configuration. Allowing this would require changes to enterprise security policies that apply to the wider organization, which is not recommended.
+
+As discussed internally, the recommended approach would be to complete the exam using a temporary unmanaged device or a personal device, where the required exam driver can be installed without impacting corporate security controls.
+
+Please let us know if further clarification is required.
