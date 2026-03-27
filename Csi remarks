@@ -1,0 +1,11 @@
+Before:
+	•	WebClient service was active, enabling WebDAV-based connections.
+	•	This created a potential attack surface for credential relay and privilege escalation attacks.
+	•	Lack of restriction allowed SYSTEM context authentication to external/untrusted endpoints.
+	•	No mitigation controls were implemented at scale.
+
+After:
+	•	Implemented automated remediation to disable WebClient service across all endpoints.
+	•	Eliminated WebDAV-based attack vectors and reduced lateral movement risks.
+	•	Enforced security baseline via centralized policy (Intune/PowerShell).
+	•	Continuous compliance ensured through policy enforcement and monitoring.
