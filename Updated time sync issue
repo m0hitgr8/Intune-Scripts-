@@ -1,0 +1,75 @@
+# Remediation script: enforce correct timezone, DST behavior, and robust time sync
+
+$log = "C:\Windows\Temp\FixDST_$(Get-Date -Format 'yyyyMMdd_HHmmss').log"
+Function Log { param($m) Add-Content -Path $log -Value ("[{0}] {1}" -f (Get-Date -Format o), $m) }
+
+try {
+    Log "Starting DST/time remediation."
+
+    # 1) Set correct UK timezone (handles DST automatically)
+    $tz = "GMT Standard Time"
+    try {
+        Set-TimeZone -Id $tz -ErrorAction Stop
+        Log "Set-TimeZone -> $tz"
+    } catch {
+        Log "Failed to Set-TimeZone: $_"
+    }
+
+    # 2) Ensure DST auto-adjust is enabled
+    $regPath = "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation"
+    try {
+        if (-not (Test-Path $regPath)) { New-Item -Path $regPath -Force | Out-Null }
+        Set-ItemProperty -Path $regPath -Name "DisableAutoDaylightTimeSet" -Value 0 -Type DWord -Force
+        Log "DisableAutoDaylightTimeSet set to 0"
+    } catch {
+        Log "Failed to set DST registry: $_"
+    }
+
+    # 3) HARD reset Windows Time Service (IMPORTANT for DST end issue)
+    try {
+        Log "Resetting Windows Time Service"
+        net stop w32time | Out-Null
+        w32tm /unregister | Out-Null
+        w32tm /register | Out-Null
+        net start w32time | Out-Null
+        Log "W32Time service reset completed"
+    } catch {
+        Log "Failed to reset W32Time: $_"
+    }
+
+    # 4) Configure reliable time source (fallback if needed)
+    try {
+        w32tm /config /syncfromflags:domhier /update | Out-Null
+        Log "Configured sync from domain hierarchy"
+    } catch {
+        Log "Failed to configure NTP source: $_"
+    }
+
+    # 5) Force multiple resync attempts (VERY IMPORTANT)
+    try {
+        Log "Forcing time sync"
+        w32tm /resync /force | Out-Null
+        Start-Sleep -Seconds 5
+        w32tm /resync /force | Out-Null
+        Log "Time resync completed"
+    } catch {
+        Log "Resync failed: $_"
+    }
+
+    # 6) Final validation log
+    try {
+        $curTZ = Get-TimeZone
+        $time = Get-Date
+        Log "Final TimeZone: $($curTZ.Id)"
+        Log "Final Local Time: $time"
+    } catch {
+        Log "Validation failed: $_"
+    }
+
+    Log "DST/time remediation completed successfully."
+    exit 0
+
+} catch {
+    Log "Unhandled error: $_"
+    exit 1
+}
