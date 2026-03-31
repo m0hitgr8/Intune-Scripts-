@@ -1,0 +1,30 @@
+# Fix device stuck on Local CMOS Clock
+
+# 1. Set correct timezone
+Set-TimeZone -Id "GMT Standard Time"
+
+# 2. Enable DST
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" `
+-Name "DisableAutoDaylightTimeSet" -Value 0 -Type DWord -Force
+
+# 3. Stop time service
+net stop w32time
+
+# 4. Reset time service completely
+w32tm /unregister
+w32tm /register
+
+# 5. Configure correct NTP server (IMPORTANT)
+w32tm /config /manualpeerlist:"time.windows.com,0x8" /syncfromflags:manual /update
+
+# 6. Start service
+net start w32time
+
+# 7. Force sync (multiple times)
+w32tm /resync /force
+Start-Sleep 5
+w32tm /resync /force
+
+# 8. Verify
+w32tm /query /status
+Get-Date
