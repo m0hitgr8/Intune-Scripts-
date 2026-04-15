@@ -1,0 +1,44 @@
+Overall Design Summary – Chrome Deployment & Access Model
+
+The Google Chrome deployment is designed using a layered group structure to ensure clear separation of responsibilities between policy enforcement, application deployment, and user access control. This approach improves consistency, reduces conflicts, and simplifies ongoing management.
+
+⸻
+
+1. Policy Layer – Configuration Control
+
+The Policy Layer acts as the single source of configuration for Google Chrome.
+	•	All Chrome-related settings and policies are assigned through one central group
+	•	No users or devices are directly added to this layer
+	•	Ensures policies are applied only where Chrome is deployed
+	•	Helps maintain consistency and avoids conflicting configurations
+
+⸻
+
+2. Deployment Layer – Installation Management
+
+The Deployment Layer controls how Google Chrome is delivered to users and devices.
+	•	Separates deployment into:
+	•	Required Installation (automatic deployment)
+	•	Available Installation (user-initiated via Company Portal)
+	•	These groups are nested under the Policy Layer
+	•	Ensures a controlled and flexible deployment approach based on business needs
+
+⸻
+
+3. Access Layer – Eligibility Control
+
+The Access Layer defines who is allowed to install Google Chrome.
+	•	Uses permission-based groups to manage eligibility
+	•	These groups are nested under the Available Deployment group
+	•	Not directly assigned to applications or policies
+	•	Provides flexible access control without impacting deployment or policy behavior
+
+⸻
+
+Conclusion
+
+This layered design ensures:
+	•	Clear separation between configuration, deployment, and access
+	•	No overlapping assignments or conflicts
+	•	Improved user experience and administrative control
+	•	Simplified troubleshooting and maintenance
