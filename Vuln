@@ -1,0 +1,265 @@
+7. Installed Version Verification Process
+
+Before initiating any remediation activity, the EUC (Endpoint Engineering) team performs a detailed validation and impact assessment process to confirm the vulnerable application versions, deployment feasibility, and remediation approach.
+
+The purpose of this process is to:
+
+* Validate the vulnerable application footprint across the environment
+* Identify affected device population
+* Verify whether updated secure versions are already deployed
+* Assess deployment readiness
+* Determine remediation approach using Intune and Patch My PC
+* Minimize business and operational impact during remediation
+
+⸻
+
+7.1 Workorder Review & Initial Analysis
+
+Once the workorder/ticket is assigned by the Risk and Compliance team, the EUC team begins the remediation analysis process.
+
+The assigned engineer reviews:
+
+* Vulnerability details
+* CVE reference
+* Affected application
+* Installed vulnerable version
+* Recommended fixed version
+* Affected device count
+* Severity level
+* Remediation SLA
+* Vendor recommendations
+
+The engineer also validates whether:
+
+* The vulnerability is application-related
+* The vulnerability is OS patch-related
+* The remediation already exists in the environment
+* The vulnerability is linked to an ongoing patch cycle
+
+⸻
+
+7.2 Installed Version Validation Process
+
+The EUC team validates the currently installed application versions across managed devices to determine:
+
+* Existing vulnerable versions
+* Deployment coverage
+* Devices pending remediation
+* Devices already updated
+* Non-reporting or inactive devices
+
+⸻
+
+7.3 Validation Using Microsoft Intune
+
+The primary validation platform used is:
+Microsoft Intune
+
+Intune Validation Steps
+
+Step 1 – Login to Intune Admin Center
+
+Navigate to:
+
+* Microsoft Intune Admin Center
+* Apps
+* Monitor
+* Discovered Apps
+
+⸻
+
+Step 2 – Search Vulnerable Application
+
+Search for:
+
+* Vulnerable application name
+
+Example:
+
+* Google Chrome
+* Adobe Acrobat
+* Zoom
+* Notepad++
+
+The EUC team validates:
+
+* Installed application versions
+* Number of affected devices
+* Existing deployment status
+* Latest deployed version
+
+⸻
+
+Step 3 – Validate Existing Deployment
+
+The team verifies whether:
+
+* The latest secure version is already deployed
+* Supersedence is configured
+* Deployment assignment exists
+* Devices are checking into Intune properly
+
+The following checks are performed:
+
+* Install status
+* Detection status
+* Assignment status
+* Deployment failures
+* Device compliance status
+
+⸻
+
+7.4 Vulnerable Application Footprint Analysis
+
+The EUC team analyzes the application footprint to determine:
+
+* Total affected device population
+* Business-critical device impact
+* Regional impact
+* Department-specific impact
+* VIP or executive device impact
+* Cloud PC impact
+* Shared device impact
+
+This analysis helps define:
+
+* Deployment priority
+* Pilot group selection
+* Deployment ring strategy
+* Communication requirements
+
+⸻
+
+7.5 Patch My PC Version Verification
+
+For third-party applications, the EUC team validates the latest secure version availability in:
+Patch My PC
+
+⸻
+
+Validation Activities
+
+The engineer performs the following checks:
+
+Application Availability
+
+Verify whether the application exists in Patch My PC catalog.
+
+⸻
+
+Latest Version Validation
+
+Validate:
+
+* Latest available version
+* Release date
+* Vendor release notes
+* Security fixes included
+* Supported architecture (x64/x86)
+
+⸻
+
+Deployment Readiness Validation
+
+Validate:
+
+* Silent install support
+* Detection method availability
+* Supersedence configuration
+* Auto-update capability
+* Intune publishing support
+
+⸻
+
+7.6 Windows Update Vulnerability Validation Process
+
+If the vulnerability is related to:
+
+* Windows cumulative updates
+* Security updates
+* Feature updates
+* Microsoft patches
+
+then the EUC team validates the vulnerability against the current patch cycle.
+
+⸻
+
+7.7 Monthly Patch Cycle Validation
+
+The engineering team checks whether the vulnerability belongs to:
+
+* Current month patch cycle
+* Previous month patch cycle (N-1)
+* Out-of-band security update
+* Emergency patch release
+
+⸻
+
+Current Month Patch Validation
+
+If the vulnerability belongs to the current patch cycle:
+
+* The EUC team validates deployment progress in Intune
+* Update compliance is checked
+* Devices pending installation are identified
+* Risk and Compliance team is informed
+
+In such scenarios, the Risk and Compliance team may temporarily exclude the vulnerability until the patch deployment cycle completes.
+
+⸻
+
+N-1 Patch Compliance Validation
+
+If the vulnerability does not belong to the current month cycle, the EUC team checks:
+
+* N-1 update compliance status
+* Devices missing previous month updates
+* Deployment failures
+* Safeguard holds
+* Device update errors
+
+Validation is performed through:
+
+* Intune Update Compliance Reports
+* Windows Update for Business reports
+* Device update ring status
+* Feature update reports
+
+⸻
+
+7.8 Business Impact Assessment
+
+Before remediation deployment, the EUC team performs business impact analysis to identify:
+
+* Critical business applications
+* Potential downtime risks
+* Restart requirements
+* Application dependency conflicts
+* User productivity impact
+* VPN or authentication impact
+
+The assessment helps determine:
+
+* Deployment scheduling
+* Maintenance windows
+* Pilot device selection
+* Communication requirements
+
+⸻
+
+7.9 Remediation Feasibility Assessment
+
+The EUC team validates whether:
+
+* The remediation can be deployed silently
+* User interaction is required
+* Restart is required
+* Existing application assignments may conflict
+* Deployment can be completed within SLA
+
+The team also validates rollback feasibility by checking:
+
+* Previous application versions
+* Uninstall capability
+* Restore process
+* Deployment rollback options
