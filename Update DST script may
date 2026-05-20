@@ -1,0 +1,30 @@
+# Set timezone
+tzutil /s "GMT Standard Time"
+
+# Enable automatic timezone detection
+Set-ItemProperty `
+-Path "HKLM:\SYSTEM\CurrentControlSet\Services\tzautoupdate" `
+-Name "Start" `
+-Value 3
+
+# Enable DST adjustment
+Set-ItemProperty `
+-Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" `
+-Name "DynamicDaylightTimeDisabled" `
+-Value 0
+
+# Configure NTP
+w32tm /config `
+/syncfromflags:manual `
+/manualpeerlist:"time.windows.com,0x8"
+
+# Restart time service
+Restart-Service w32time -Force
+
+# Force sync
+w32tm /resync /force
+
+# Ensure automatic startup
+Set-Service w32time -StartupType Automatic
+
+Write-Output "DST self-healing remediation completed"
