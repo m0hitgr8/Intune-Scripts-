@@ -1,0 +1,62 @@
+Google Chrome AD Group Structure – Proposed Design
+
+Objective
+
+The objective of this design is to simplify Google Chrome application and policy management by reducing the number of assigned groups and maintaining a single group for Chrome deployment and configuration. This approach improves manageability, reduces assignment complexity, and provides a clear access control model.
+
+⸻
+
+Proposed Group Structure
+
+Primary Assignment Group
+
+APPL-D-GoogleChrome-Install-Available
+
+This group will act as the primary group for:
+
+* Google Chrome application assignment
+* Google Chrome policy assignment
+* User access management through nested groups
+
+This ensures that Chrome deployment and policy application are managed through a single assignment group.
+
+⸻
+
+Permission Groups
+
+PERM-D-Intune-Chrome-AuthorizedOnly
+
+* This group will remain nested under APPL-D-GoogleChrome-Install-Available
+* Used to control access for users authorized to install Google Chrome
+* Provides flexibility for managing Chrome eligibility without modifying application assignments
+
+PERM-D-Intune-Win-DeveloperUsers
+
+* Members of this group will be moved under APPL-D-GoogleChrome-Install-Available
+* Continues to provide Chrome access for developer users
+* Simplifies the overall group structure by removing unnecessary intermediate assignments
+
+⸻
+
+Group Decommissioning
+
+APPL-D-GoogleChrome
+
+* Existing policy assignment group can be removed
+* Functionality will be consolidated into APPL-D-GoogleChrome-Install-Available
+
+APPL-D-GoogleChrome-Install-Required
+
+* Can be decommissioned after any existing users are migrated or removed
+* No longer required in the simplified design
+
+⸻
+
+Benefits of the Proposed Design
+
+* Single group used for Chrome policy and application assignment
+* Reduced administrative overhead
+* Simplified troubleshooting and ownership
+* Clear access management through nested permission groups
+* Elimination of redundant deployment groups
+* Easier long-term maintenance and governance
